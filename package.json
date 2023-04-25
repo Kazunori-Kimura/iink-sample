@@ -14,6 +14,8 @@
         "@types/react": "^18.0.37",
         "@types/react-dom": "^18.0.11",
         "iink-js": "^2.0.1",
+        "katex": "^0.16.6",
+        "mathjax-full": "^3.2.2",
         "pepjs": "^0.5.3",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
@@ -48,6 +50,7 @@
         ]
     },
     "devDependencies": {
+        "@types/katex": "^0.16.0",
         "eslint-config-prettier": "^8.8.0",
         "prettier": "^2.8.7"
     },
