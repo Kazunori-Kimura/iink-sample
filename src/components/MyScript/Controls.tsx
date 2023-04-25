@@ -47,6 +47,18 @@ export default function Controls({ sx = {}, onClear }: Props) {
         console.log(svg);
     }, []);
 
+    const handleClickSave = useCallback(() => {
+        const jiix = MyScript.instance.exportJiix();
+        window.localStorage.setItem('jiix', jiix);
+    }, []);
+
+    const handleClickRestore = useCallback(() => {
+        const jiix = window.localStorage.getItem('jiix');
+        if (jiix) {
+            MyScript.instance.importJiix(jiix);
+        }
+    }, []);
+
     return (
         <Stack sx={sx} direction="row" spacing={2} alignItems="center">
             <FormControl>
@@ -61,6 +73,8 @@ export default function Controls({ sx = {}, onClear }: Props) {
             <Button disabled={type !== 'MATH'} onClick={handleClickSVG}>
                 toSVG
             </Button>
+            <Button onClick={handleClickSave}>save</Button>
+            <Button onClick={handleClickRestore}>restore</Button>
         </Stack>
     );
 }

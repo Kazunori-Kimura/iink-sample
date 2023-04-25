@@ -93,28 +93,27 @@ export default class MyScript {
         }
 
         if (typeof this.editor === 'undefined') {
-            this._editor = iink.register(
-                this._element,
-                {
-                    recognitionParams: {
-                        type,
-                        protocol: 'WEBSOCKET',
-                        server: {
-                            applicationKey: process.env.REACT_APP_MYSCRIPT_APP_KEY,
-                            hmacKey: process.env.REACT_APP_MYSCRIPT_HMAC_KEY,
+            this._editor = iink.register(this._element, {
+                recognitionParams: {
+                    type,
+                    protocol: 'WEBSOCKET',
+                    server: {
+                        applicationKey: process.env.REACT_APP_MYSCRIPT_APP_KEY,
+                        hmacKey: process.env.REACT_APP_MYSCRIPT_HMAC_KEY,
+                    },
+                    iink: {
+                        lang: 'ja_JP',
+                        math: {
+                            mimeTypes: ['application/vnd.myscript.jiix', 'application/x-latex'],
                         },
-                        iink: {
-                            lang: 'ja_JP',
+                        export: {
+                            jiix: {
+                                strokes: true,
+                            },
                         },
                     },
                 },
-                undefined,
-                {
-                    '.text': {
-                        'line-height': 3.0,
-                    },
-                }
-            );
+            });
         } else {
             // クリアする
             this.clear();
@@ -155,6 +154,23 @@ export default class MyScript {
             }
         }
         return '';
+    }
+
+    /**
+     * 描いた内容を取得
+     * @returns
+     */
+    public exportJiix() {
+        return this._editor?.model?.exports?.['application/vnd.myscript.jiix'];
+    }
+
+    /**
+     * 描いた内容を復元する
+     * @param jiix
+     */
+    public importJiix(jiix: string) {
+        this.clear();
+        this._editor?.import_(jiix, 'application/vnd.myscript.jiix');
     }
 
     /**
