@@ -1,14 +1,11 @@
-import { CssBaseline, Divider } from '@mui/material';
-import Controls from './Controls';
-import Editor from './Editor';
+import { CssBaseline } from '@mui/material';
+import MyScript from './MyScript';
 
 function App() {
     return (
         <>
             <CssBaseline />
-            <Controls sx={{ p: 1 }} />
-            <Divider />
-            <Editor
+            <MyScript
                 sx={{
                     width: '100dvw',
                     height: '50dvh',
